@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rick and Morty API - Frontend Project
 
-## Getting Started
+This project is a web application built using **Next.js** and **React**, where users can interact with the **Rick and Morty API** to filter, sort, and view a table of characters from the show. The application allows users to filter and sort data, paginate through results, and view detailed information about characters.
+## Deployment
 
-First, run the development server:
+The application is live and can be accessed [here](https://rickandmorty-api-dogukan2201s-projects.vercel.app/).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Search and Filter**: Users can filter the character data based on name, species, or gender.
+- **Sorting**: Users can sort the character data by name or other criteria.
+- **Pagination**: The data is paginated to handle large datasets effectively, with a customizable page size.
+- **Detailed View**: When a user clicks on a row in the table, detailed information about the selected character is displayed below the table.
+- **Error Handling**: The application properly handles API errors and displays relevant messages when no data is found.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js**: Framework used for building the application.
+- **React**: For building the user interface and managing the state.
+- **Context API**: Used for global state management.
+- **Shadcn**: A UI component library used for styling.
+- **Tailwind CSS**: Utility-first CSS framework for styling the application.
+- **API**: [Rick and Morty API](https://rickandmortyapi.com/) to fetch character data.
+- **Vercel**: The application is deployed and live on Vercel.
 
-## Learn More
+## How to Run
 
-To learn more about Next.js, take a look at the following resources:
+To run this project locally:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/rick-and-morty-api-project.git
+   ```
+2. Install dependencies:
+   ```bash
+   cd rick-and-morty-api-project
+   npm install
+   ```
+3. Run the app:
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:3000`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
