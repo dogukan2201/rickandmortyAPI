@@ -1,9 +1,10 @@
 "use client";
+
 import { useContext, useEffect, useState } from "react";
 import CharacterCard from "./components/CharacterCard";
 import CharacterTable from "./components/CharacterTable";
 import { getAllCharacters } from "../services/api";
-import Filter from "./components/Filter";
+import FilterWrapper from "./components/Filter";
 import { AppContext } from "@/context";
 import Loading from "./components/Loading";
 import type { Character } from "./components/CharacterCard";
@@ -13,21 +14,19 @@ export default function Home() {
   const { filteredData, loading, setLoading } = useContext(AppContext);
 
   useEffect(() => {
-    setLoading(true);
-    if (filteredData.length > 0) {
-      setCharacterData(filteredData);
-      console.log(filteredData);
-      setLoading(false);
-      return;
-    }
     const fetchData = async () => {
       setLoading(true);
       try {
-        const data = await getAllCharacters();
-        if (data && data.length > 0) {
-          setCharacterData(data);
+        if (filteredData.length > 0) {
+          setCharacterData(filteredData);
+          console.log(filteredData);
         } else {
-          setCharacterData([]);
+          const data = await getAllCharacters();
+          if (data && data.length > 0) {
+            setCharacterData(data);
+          } else {
+            setCharacterData([]);
+          }
         }
       } catch (error) {
         console.error("Error fetching characters:", error);
@@ -38,11 +37,11 @@ export default function Home() {
     };
 
     fetchData();
-  }, [filteredData]);
+  }, [filteredData, setLoading]);
 
   return (
     <div className="items-center justify-center">
-      <Filter />
+      <FilterWrapper />
       {loading ? <Loading /> : <CharacterTable data={characterData} />}
       <CharacterCard />
     </div>

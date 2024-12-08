@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useContext } from "react";
+
+import React, { useState, useContext, Suspense } from "react";
 import { AppContext } from "@/context/";
 import { useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
@@ -15,11 +16,18 @@ import { Button } from "@/components/ui/button";
 import { filteredCharacter } from "../../services/api";
 import { toast } from "react-hot-toast";
 
-const Filter = () => {
+const FilterWrapper = () => {
+  return (
+    <Suspense fallback={<div>Loading filters...</div>}>
+      <FilterContent />
+    </Suspense>
+  );
+};
+
+const FilterContent = () => {
   const searchParams = useSearchParams();
   const { setFilteredData, setLoading } = useContext(AppContext);
   const [filters, setFilters] = useState({
-    //Filtreleme islemleri yapabilmek icin gerekli olan state tanimlandi
     name: searchParams.get("name") || "",
     status: searchParams.get("status") || "",
     species: searchParams.get("species") || "",
@@ -38,7 +46,7 @@ const Filter = () => {
   const applyFilters = async () => {
     setLoading(true);
 
-    const queryParams = new URLSearchParams(); // Bu nesne URL sorgu parametrelerini kolayca yönetmek için kullanıldı.
+    const queryParams = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {
       if (value) {
         queryParams.append(key, value);
@@ -46,7 +54,7 @@ const Filter = () => {
     });
 
     try {
-      const data = await filteredCharacter(queryParams.toString()); //Servicesde tanımladığım fonksiyona gidip mevcut query göre veriler alındı
+      const data = await filteredCharacter(queryParams.toString());
 
       if (data && data.length > 0) {
         toast.success("Filters applied successfully!");
@@ -178,4 +186,4 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default FilterWrapper;
