@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useContext, Suspense } from "react";
+import React, { useState, useContext } from "react";
 import { AppContext } from "@/context/";
-import { useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -16,23 +15,14 @@ import { Button } from "@/components/ui/button";
 import { filteredCharacter } from "../../services/api";
 import { toast } from "react-hot-toast";
 
-const FilterWrapper = () => {
-  return (
-    <Suspense fallback={<div>Loading filters...</div>}>
-      <FilterContent />
-    </Suspense>
-  );
-};
-
-const FilterContent = () => {
-  const searchParams = useSearchParams();
+const Filter = () => {
   const { setFilteredData, setLoading } = useContext(AppContext);
   const [filters, setFilters] = useState({
-    name: searchParams.get("name") || "",
-    status: searchParams.get("status") || "",
-    species: searchParams.get("species") || "",
-    type: searchParams.get("type") || "",
-    gender: searchParams.get("gender") || "",
+    name: "",
+    status: "",
+    species: "",
+    type: "",
+    gender: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -186,4 +176,4 @@ const FilterContent = () => {
   );
 };
 
-export default FilterWrapper;
+export default Filter;
